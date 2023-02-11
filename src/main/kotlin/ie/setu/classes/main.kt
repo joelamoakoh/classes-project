@@ -1,5 +1,8 @@
 package ie.setu.classes
 
+data class Person(var firstName: String, var lastName: String) {
+
+}
 private val persons = ArrayList<Person>()
 
 fun main(args: Array<String>) {
@@ -9,6 +12,7 @@ fun main(args: Array<String>) {
 
     for ((index, value) in persons.withIndex())
         println("$index: $value")
+
 }
 fun personInfo(){
     val person1 = Person("Mark", "Roche")
@@ -22,13 +26,25 @@ fun personInfo(){
     println("person2 hashcode = ${person2.hashCode()}")
     println("person3 hashcode = ${person3.hashCode()}")
 
-    if (person1.equals(person2))
+    if (person1 == person2)
         println("person1 is equal to person2.")
     else
         println("person1 is not equal to person2.")
 
-    if (person1.equals(person3))
+    if (person1 == person3)
         println("person1 is equal to person3.")
     else
         println("person1 is not equal to person3.")
+
+    println("\nFiltering first name as John:")
+    persons
+        .filter {it.firstName.contains("John")}
+        .forEach { println(it) }
+
+    println("\nSorting by last name, last name uppercased:")
+    persons
+        .sortedBy {it.lastName}
+        .forEach { println("Person: ${it.firstName}, ${it.lastName.uppercase()}")}
+
+
 }
